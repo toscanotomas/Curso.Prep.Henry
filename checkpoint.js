@@ -7,7 +7,15 @@ function sumaTodosImpares(array) {
   // sumaTodosImpares([1, 5, 2, 9, 6, 4]) devuelve 1 + 5 + 9 = 15
 
   // Tu código aca:
-  
+  var nuevoarray = [];
+  var suma = 0
+  for (var i = 0; i < array.length; i++) {
+    if(array[i] % 2) {
+      nuevoarray.push(array[i]);
+      suma += array[i];
+    }
+  }
+  return suma;
 }
 
 function stringMasLarga(str) {
@@ -19,7 +27,14 @@ function stringMasLarga(str) {
   // Tip: podes usar el metodo de String 'split'
 
   // Tu código aca:
-
+  let words = str.split(' ')
+  let myLongestWord = '';
+  for(let word of words) {
+    if(word.length > myLongestWord.length) {
+      myLongestWord = word
+    }
+  }
+  return myLongestWord;
 }
 
 function estaOffline(usuarios, nombre) {
@@ -45,8 +60,35 @@ function estaOffline(usuarios, nombre) {
   // estaOffline(usuarios, 'emi') retorna false
 
   // Tu código aca:
-  
-}
+  var usuarios = [
+         {
+           nombre: 'toni',
+           online: true
+         },
+         {
+           nombre: 'emi',
+           online: true
+         },
+         {
+           nombre: 'agus',
+           online: false
+         }
+     ];
+     let online = null;
+
+                 usuarios.forEach(function (o) {
+                     if (o.nombre == nombre) {
+                         online = !o.online; 
+                         return false;
+                     }
+                 });
+
+                 return online;
+        }
+
+
+
+
 
 function actividadesEnComun(persona1, persona2) {
   // La funcion llamada 'actividadesEnComun' recibe como argumento dos arrays de actividades (strings) llamados 'persona1' y 'persona2'
@@ -56,8 +98,19 @@ function actividadesEnComun(persona1, persona2) {
   // actividadesEnComun(persona1, persona2) => ['comer', 'dormir']
   // Tip: podes usar ciclos for anidados.
   // Tu código aca:
+var coincidencias = [];
 
+  for(var i = 0; i < persona1.length; i++) {
+
+    for(var elemento of persona2) {
+      if(persona1[i] === elemento ) {
+       coincidencias.push(elemento);
+     }
+   }
+  }
+  return coincidencias;
 }
+
 
 function buscaDestruye(arreglo, num) {
   // La funcion 'buscaDestruye' recibe como argumento un array de enteros 'arreglo' y un entero 'num'.
@@ -68,8 +121,16 @@ function buscaDestruye(arreglo, num) {
   // Ej: buscaDestruye([1, 2, 3, 4, 1], 1) devuelve => [2, 3, 4]
   //
   // Tu código aca:
-
+  const nuevoArreglo = [];
+  for (let i = 0; i < arreglo.length; i++) {
+    if (arreglo[i] !== num) {
+      nuevoArreglo.push(arreglo[i]);
+    }
+  }
+  return nuevoArreglo;
 }
+
+
 
 function sumarElTipo(arreglo) {
   // La funcion llamada 'sumarElTipo' recibe un array de strings como argumento
@@ -81,8 +142,21 @@ function sumarElTipo(arreglo) {
   // Tip: podes usar el ciclo for o el metodo de Array 'reduce'
 
   // Tu código aca:
-
+  return arreglo.reduce(function (acc, curr) {
+        if(acc[curr] === undefined) {
+            acc[curr] = 1;
+        }else{
+            acc[curr] ++;
+        }
+        return acc;
+    },
+    {}
+    );
 }
+
+
+
+
 
 // =======================================================================
 
@@ -93,16 +167,25 @@ function crearClaseEmprendedor() {
           // Inicializar las propiedades del emprendedor con los valores recibidos como argumento
 
           // Tu código aca:
-
-      }
+      this.nombre = nombre;
+      this.apellido = apellido;
+      this.libros = libros;
+      this.mascotas = mascotas;
+    
+    
+          
+           
+   } 
 
       addMascota(mascota) {
         // este método debe agregar una mascota (mascota) al arreglo de mascotas del emprendedor.
         // no debe retornar nada.
 
         // Tu código aca:
+      this.mascotas.push(mascota);
 
-      }
+    
+ }
 
       getMascotas() {
           // El método 'getMascotas' debe retornar la cantidad de mascotas que tiene el emprendedor.
@@ -111,8 +194,10 @@ function crearClaseEmprendedor() {
           // emprendedor.getMascotas() debería devolver 2
 
           // Tu código aca:
+          return this.mascotas.push();
+          
 
-      }
+ }
 
       addBook(book, autor) {
           // El método 'addBook' recibe un string 'book' y un string 'autor' y debe agregar un objeto:
@@ -120,8 +205,11 @@ function crearClaseEmprendedor() {
           // No debe retornar nada.
 
           // Tu código aca:
+          let libro = {nombre, edad}
+          this.libro.push({amigo});
 
-      }
+}
+
 
       getBooks() {
           // El método 'getBooks' debe retornar un arreglo con sólo los nombres del arreglo de libros del emprendedor.
@@ -130,6 +218,8 @@ function crearClaseEmprendedor() {
           // emprendedor.getBooks() debería devolver ['El señor de las moscas', 'Fundacion']
 
           // Tu código aca:
+        return this.libros.map(item => item.nombre);
+        
 
       }
 
@@ -140,7 +230,7 @@ function crearClaseEmprendedor() {
           // emprendedor.getFullName() deberia devolver 'Elon Musk'
 
           // Tu código aca:
-
+          return this.nombre + ' ' + this.apellido;
       }
   }
 
